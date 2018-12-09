@@ -1,0 +1,46 @@
+  <main role="main">
+
+    <section class="jumbotron text-center">
+      <div class="container">
+        <h1 class="jumbotron-heading">このサイトはなに？</h1>
+        <p class="lead text-muted">バイオリン教室のタウンページがあったらなぁ、という思いで作りました。完全に趣味で制作しているので料金などは発生しません。</p>
+        <p class="lead text-muted">仲介しているわけではないので、教室等で発生したトラブルなどは一切関知しません。ご了承ください m(_ _)m</p>
+      </div>
+    </section>
+
+    <div class="album py-5 bg-light">
+      <div class="container">
+        <div class="row">
+          <% @schools.each do |school| %>
+          <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+              <a href="/schools/<%= school.id %>">
+              <% if school.card_photo.nil? %>
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"><title>カード画像のキャプション</title><rect fill="#55595c" width="100%" height="100%" /><text fill="#eceeef" dy=".3em" x="50%" y="50%">NO IMAGE</text></svg>
+              <% else %>
+              <img src="<%= school.card_photo %>" width="100%" />
+              <% end %>
+              </a>
+              <div class="card-body">
+                <p class="card-text"><%= school.school_name %></p>
+                <p class="card-text"><i class="fa fa-map-marker"></i>&nbsp;<%= school.address_pref %><%= school.address_city %></p>
+                <% unless school.lesson_time.nil? or school.lesson_price.nil? %>
+                <p class="card-text"><i class="fa fa-clock-o"></i>&nbsp;<%= school.lesson_time %>分&nbsp;<i class="fa fa-jpy"></i>&nbsp;<%= school.lesson_price %>くらい</p>
+                <% end %>
+                <% unless school.instructor_start_year.nil? %>
+                <p class="card-text">講師歴：<%= Time.now.year - school.instructor_start_year %>年</p>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <% end %>
+        </div>
+      </div>
+
+      <hr class="container mt-5">
+      <div class="my-4 text-center">
+        <%= paginate @schools %>
+      </div>
+
+    </div><!-- /.album	-->
+  </main>
