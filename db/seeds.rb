@@ -12,5 +12,5 @@ Genre.create(genre_name: 'ロック')
 
 require "csv"
 CSV.foreach('db/schools.csv') do |row|
-  School.create(:school_name => row[0], :address_pref => row[1], :address_city => row[2], :address_block => row[3], :tel => row[4], :lesson_price => row[5], :lesson_time => row[6], :admission_fee => row[7], :self_pr => row[8], :home_page_url => row[9], :card_photo => row[10], :cover_photo => row[11], :status => 1)
+  School.create(:school_name => row[0], :address_pref => row[1], :address_city => row[2], :address_block => row[3], :tel => row[4], :lesson_price => row[5], :lesson_time => row[6], :admission_fee => row[7], :self_pr => row[8], :home_page_url => row[9], :card_photo => row[10], :cover_photo => row[11])
 end

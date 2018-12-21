@@ -1,0 +1,214 @@
+  <div class="container">
+  <%= form_for @school, :url => {:action => :create}, :html => {:class => "needs-validation", :novalidate => "novalidate" }  do |f| %>
+    <div class="row">
+      <div class="col-md-12 order-md-1">
+        <h4 class="mb-3">教室情報</h4>
+
+          <div class="row">
+            <div class="col-md-12 mb-3">
+              <label for="school-name">教室名</label>
+              <%= f.text_field :school_name, :class => "form-control", :placeholder => "ヤマハ音楽教室", required: true %>
+              <div class="invalid-feedback">
+                教室名を入力してください
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-3 mb-3">
+              <label for="address-pref">都道府県</label>
+              <%= f.text_field :address_pref, :class => "form-control", :placeholder => "東京都", required: true %>
+              <div class="invalid-feedback">
+                都道府県を入力してください
+              </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="address-city">市区町村</label>
+              <%= f.text_field :address_city, :class => "form-control", :placeholder => "千代田区", required: true %>
+              <div class="invalid-feedback">
+                市区町村を入力してください
+              </div>
+            </div>
+            <div class="col-md-5 mb-3">
+              <label for="address-block">番地・建物名</label>
+              <%= f.text_field :address_block, :class => "form-control", :placeholder => "１－１－１" %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="near-station">最寄り駅</label>
+              <%= f.text_field :near_station, :class => "form-control", :placeholder => "東京駅" %>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="walk-within">駅からの距離（徒歩xx分）</label>
+              <%= f.number_field :walk_within, :class => "form-control", :placeholder => "15" %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="lesson-price">レッスン料金（１回あたり）</label>
+              <%= f.number_field :lesson_price, :class => "form-control", :placeholder => "3000", required: true %>
+              <div class="invalid-feedback">
+                レッスン料金（１回あたり）を入力してください
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="lesson-time">レッスン時間（分）</label>
+              <%= f.number_field :lesson_time, :class => "form-control", :placeholder => "45", required: true %>
+              <div class="invalid-feedback">
+                レッスン時間（分）を入力してください
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="admission-fee">入会金</label>
+              <%= f.number_field :admission_fee, :class => "form-control", :placeholder => "0" %>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="trial-lesson">体験レッスン</label>
+              <%= f.select :trial_lesson, [["体験レッスンあり", "1"], ["体験レッスンなし", "0"]], {:include_blank => true}, :class => "form-control" %>
+            </div>
+          </div>
+
+         <div class="row">
+            <div class="col-md-12 mb-3">
+              <label for="card-photo">プロフィール写真</label>
+              <div class="custom-file">
+                <%= f.file_field :card_photo, id: :card_photo, :class => "form-control custom-file-input", required: true %>
+                <label class="custom-file-label" for="card_photo">ファイル選択...</label>
+                <div class="invalid-feedback">
+                  プロフィール写真を選択してください
+                </div>
+              </div>
+              <img id="card_photo_prev" style="max-width: 100%;" src="data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=" />
+            </div>
+         </div>
+
+         <div class="row">
+            <div class="col-md-12 mb-3">
+              <label for="card-photo">カバー写真</label>
+              <div class="custom-file">
+                <%= f.file_field :cover_photo, id: :cover_photo, :class => "form-control custom-file-input" %>
+                <label class="custom-file-label" for="card_photo">ファイル選択...</label>
+              </div>
+              <img id="cover_photo_prev" style="max-width: 100%;" src="data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=" />
+            </div>
+         </div>
+
+          <div class="row">
+            <div class="col-md-12 mb-3">
+              <label for="self-pr">教室紹介文</label>
+              <%= f.text_area :self_pr, size: "30x10", :class => "form-control" %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 mb-3">
+              <label for="school-movie">教室紹介用のYoutube動画ID（Watch?v= の後ろが動画ID）</label>
+              <%= f.fields_for :school_movie do |ff| %>
+              　<%= ff.text_field :youtube_v, :class => "form-control" %>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 mb-3">
+              <label for="photo-0">教室紹介用の写真１</label>
+              <div class="custom-file">
+              <%= f.fields_for :school_photo do |ff| %>
+                <%= ff.file_field :photo, :class => "custom-file-input" %>
+                <label class="custom-file-label" for="card_photo">ファイル選択...</label>
+              <% end %>
+              </div>
+              <img id="photo_0_prev" style="max-width: 100%;" src="data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=" />
+            </div>
+            <div class="col-md-12 mb-3">
+              <label for="photo-1">教室紹介用の写真２</label>
+              <div class="custom-file">
+              <%= f.fields_for :school_photo do |ff| %>
+                <%= ff.file_field :photo, :class => "custom-file-input" %>
+                <label class="custom-file-label" for="card_photo">ファイル選択...</label>
+              <% end %>
+              </div>
+              <img id="photo_1_prev" style="max-width: 100%;" src="data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=" />
+            </div>
+            <div class="col-md-12 mb-3">
+              <label for="photo-2">教室紹介用の写真３</label>
+              <div class="custom-file">
+              <%= f.fields_for :school_photo do |ff| %>
+                <%= ff.file_field :photo, :class => "custom-file-input" %>
+                <label class="custom-file-label" for="card_photo">ファイル選択...</label>
+              <% end %>
+              </div>
+              <img id="photo_2_prev" style="max-width: 100%;" src="data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 mb-3">
+              <label for="instructor-start-year">講師開始年（講師歴）</label>
+              <%= f.number_field :instructor_start_year, :class => "form-control", :placeholder => "2000" %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 mb-3">
+              <label for="instructor-profile">講師プロフィール</label>
+              <%= f.text_area :instructor_profile, size: "30x10", :class => "form-control" %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 mb-3">
+              <label for="instruct-target">指導対象</label>
+              <select id="instruct-target" class="form-control">
+                <option value></option>
+                <option value="0">制限なし</option>
+                <option value="1">女性または子供のみ</option>
+                <option value="2">女性のみ</option>
+              </select>
+              <%= f.hidden_field :instruct_male, id: "instruct-male" %>
+              <%= f.hidden_field :instruct_female, id: "instruct-female" %>
+              <%= f.hidden_field :instruct_child, id: "instruct-child" %>
+            </div>
+          </div>
+
+          <div class="row">
+            <% @genres.each_with_index do |genre, i| %>
+              <%= f.fields_for :school_genre do |ff| %>
+              <div class="col-md-3 mb-3">
+                <%= ff.check_box :genre_id, {}, genre.id, nil %>
+                <label for="school_school_genre_attributes_<%= i %>_genre_id"><%= genre.genre_name %></label>
+              </div>
+              <% end %>
+            <% end %>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="twitter-id">Twitter ID</label>
+              <%= f.text_field :twitter_id, :class => "form-control" %>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="facebook-id">Facebook ID</label>
+              <%= f.text_field :facebook_id, :class => "form-control" %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 mb-3">
+              <label for="home-page-url">ホームページ</label>
+              <%= f.text_field :home_page_url, :class => "form-control" %>
+            </div>
+          </div>
+
+          <hr class="mb-4">
+          <%= f.submit "登録する", :class => "btn btn-primary btn-lg btn-block" %>
+      </div>
+    </div>
+    <% end %>
+  </div>

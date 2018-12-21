@@ -8,7 +8,61 @@
 				<div class="blog-post">
 					<h2 class="blog-post-title"><%= @school.school_name %></h2>
 					<hr>
+					
+					<p><i class="fa fa-map-marker"></i>&nbsp;<%= @school.address_pref.to_s %><%= @school.address_city.to_s %><%= @school.address_block.to_s %></p>
+					<% unless @school.near_station.nil? %>
+					<p>最寄り駅：<%= @school.near_station %>
+						<% unless @school.walk_within.nil? %>
+						（徒歩<%= @school.walk_within %>分圏内）
+						<% end %>
+						</p>
+					<% end %>
+					<p><i class="fa fa-phone"></i>&nbsp;<%= @school.tel.to_s %></p>
+					<p><i class="fa fa-envelope"></i>&nbsp;<%= @school.mail.to_s %></p>
+                	<% unless @school.lesson_time.nil? or @school.lesson_price.nil? %>
+                	<p><i class="fa fa-clock-o"></i>&nbsp;<%= @school.lesson_time %>分&nbsp;<i class="fa fa-jpy"></i>&nbsp;<%= @school.lesson_price %>くらい</p>
+            	    <% end %>
+					<% unless @school.admission_fee.nil? %>
+					<p>入会金：<%= @school.admission_fee %></p>
+					<% end %>
+					<% if @school.trial_lesson %>
+					<p>体験レッスンあり</p>
+					<% end %>
+
+					<p>指導対象：
+					<% if @school.instruct_female %>
+					<i class="fa fa-female"></i>女性
+					<% end %>
+					<% if @school.instruct_child %>
+					<i class="fa fa-child"></i>子供
+					<% end %>
+					<% if @school.instruct_male %>
+					<i class="fa fa-male"></i>男性
+					<% end %>
+					</p>
+
+					<p>音楽ジャンル：
+					<% unless @school.school_genre.nil? %>
+						<% @school.school_genre.each do |r| %>
+						@<%= r.genre.genre_name %>@
+						<% end %>
+					<% end %>
+
+					<hr>
 					<%= simple_format(@school.self_pr) %>
+
+					<% unless @school.school_movie.nil? %>
+						<% @school.school_movie.each do |r| %>
+						@<%= r.movie.youtube_v %>@
+						<% end %>
+					<% end %>
+					
+					<% unless @school.school_photo.nil? %>
+						<% @school.school_photo.each do |r| %>
+						<img src="<%= r.photo.photo_path %>" />
+						<% end %>
+					<% end %>
+
 				</div><!-- /.blog-post -->
 			</div><!-- /.blog-main -->
 
@@ -18,6 +72,9 @@
 					<% unless @school.card_photo.nil? %>
 					<img src="<%= @school.card_photo %>" width="100%" alt="<%= @school.school_name %>" />
 					<% end %>
+					<% unless @school.instructor_start_year.nil? %>
+    	            <p>講師歴：<%= Time.now.year - @school.instructor_start_year %>年</p>
+	                <% end %>
 					<% unless @school.instructor_profile.nil? %>
 					<p class="mb-0"><%= @school.instructor_profile %></p>
 					<% end %>

@@ -148,3 +148,12 @@ h1, h2, h3, h4, h5, h6 {
 .blog-footer p:last-child {
   margin-bottom: 0;
 }
+
+.lh-condensed { line-height: 1.25; }
+
+.custom-file-input ~ .custom-file-label::after {
+  content: "参照";
+}
+.custom-file-label {
+  white-space: nowrap;
+}

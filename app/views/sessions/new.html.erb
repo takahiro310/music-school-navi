@@ -1,0 +1,17 @@
+<%= form_for(:session, url: login_path) do |f| %>
+
+<% if flash[:danger] %>
+  <p><%= flash[:danger] %></p>
+<% end %>
+
+  <div class="field">
+    <%= f.text_field :email, id: :user_email, class: 'form_txt', placeholder: 'メールアドレス' %>
+  </div>
+
+  <div class="field">
+    <%= f.password_field  :password, id: :user_password, class: 'form_txt', placeholder: 'パスワード' %>
+  </div>
+  
+  <%= f.submit "ログイン" %>
+
+<% end %>

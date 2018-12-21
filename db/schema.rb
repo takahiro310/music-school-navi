@@ -10,14 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_09_065551) do
-
-  create_table "genre_relations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "genre_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["genre_id"], name: "index_genre_relations_on_genre_id"
-  end
+ActiveRecord::Schema.define(version: 2018_12_21_085540) do
 
   create_table "genres", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "genre_name"
@@ -25,30 +18,29 @@ ActiveRecord::Schema.define(version: 2018_12_09_065551) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "movie_relations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "movie_id"
+  create_table "school_genres", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "school_id"
+    t.bigint "genre_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["movie_id"], name: "index_movie_relations_on_movie_id"
+    t.index ["genre_id"], name: "index_school_genres_on_genre_id"
+    t.index ["school_id"], name: "index_school_genres_on_school_id"
   end
 
-  create_table "movies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "school_movies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "school_id"
     t.string "youtube_v"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["school_id"], name: "index_school_movies_on_school_id"
   end
 
-  create_table "photo_relations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "photo_id"
+  create_table "school_photos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "school_id"
+    t.string "photo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["photo_id"], name: "index_photo_relations_on_photo_id"
-  end
-
-  create_table "photos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "photo_path"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.index ["school_id"], name: "index_school_photos_on_school_id"
   end
 
   create_table "schools", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -67,29 +59,28 @@ ActiveRecord::Schema.define(version: 2018_12_09_065551) do
     t.string "card_photo"
     t.string "cover_photo"
     t.text "self_pr"
-    t.bigint "movie_relation_id"
-    t.bigint "photo_relation_id"
     t.integer "instructor_start_year"
     t.text "instructor_profile"
     t.boolean "instruct_female"
     t.boolean "instruct_child"
     t.boolean "instruct_male"
-    t.bigint "genre_relation_id"
     t.string "twitter_id"
     t.string "facebook_id"
     t.string "home_page_url"
-    t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["genre_relation_id"], name: "index_schools_on_genre_relation_id"
-    t.index ["movie_relation_id"], name: "index_schools_on_movie_relation_id"
-    t.index ["photo_relation_id"], name: "index_schools_on_photo_relation_id"
   end
 
-  add_foreign_key "genre_relations", "genres"
-  add_foreign_key "movie_relations", "movies"
-  add_foreign_key "photo_relations", "photos"
-  add_foreign_key "schools", "genre_relations"
-  add_foreign_key "schools", "movie_relations"
-  add_foreign_key "schools", "photo_relations"
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "password_digest"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "school_genres", "genres"
+  add_foreign_key "school_genres", "schools"
+  add_foreign_key "school_movies", "schools"
+  add_foreign_key "school_photos", "schools"
 end

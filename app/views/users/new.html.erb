@@ -1,0 +1,31 @@
+<%= form_for @user, :url => {:action => :create}, :html => {:class => "needs-validation", :novalidate => "novalidate" }  do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><span id="i"><%= pluralize(@user.errors.count, "") %> 件のエラーがあります。</span></h2>
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.text_field :name, id: :user_name, class: 'form_txt', placeholder: 'ユーザ名' %>
+  </div>
+
+  <div class="field">
+    <%= f.text_field :email, id: :user_email, class: 'form_txt', placeholder: 'メールアドレス' %>
+  </div>
+
+  <div class="field">
+    <%= f.password_field  :password, id: :user_password, class: 'form_txt', placeholder: 'パスワード' %>
+  </div>
+
+  <div class="field">
+    <%= f.password_field :password_confirmation, id: :user_password_confirmation, class: 'form_txt', placeholder: 'パスワード（確認用）' %>
+  </div>
+  
+  <%= f.submit "ユーザ登録" %>
+
+<% end %>

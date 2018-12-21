@@ -60,3 +60,7 @@ gem 'font-awesome-rails'
 gem 'meta-tags'
 
 gem 'kaminari', github: 'amatsuda/kaminari'
+
+gem 'carrierwave'
+
+gem 'bcrypt'

@@ -16,18 +16,14 @@ class CreateSchools < ActiveRecord::Migration[5.2]
       t.string :card_photo
       t.string :cover_photo
       t.text :self_pr
-      t.references :movie_relation, foreign_key: true
-      t.references :photo_relation, foreign_key: true
       t.integer :instructor_start_year
       t.text :instructor_profile
       t.boolean :instruct_female
       t.boolean :instruct_child
       t.boolean :instruct_male
-      t.references :genre_relation, foreign_key: true
       t.string :twitter_id
       t.string :facebook_id
       t.string :home_page_url
-      t.integer :status
 
       t.timestamps
     end
