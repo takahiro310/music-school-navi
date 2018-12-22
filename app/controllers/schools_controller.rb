@@ -1,8 +1,6 @@
 class SchoolsController < ApplicationController
 
   def index
-    @user ||= User.find(session[:user_id])
-    logger.debug(@user.email)
     @schools = School.page(params[:page])
   end
   

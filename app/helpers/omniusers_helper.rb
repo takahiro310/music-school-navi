@@ -1,0 +1,2 @@
+module OmniusersHelper
+end

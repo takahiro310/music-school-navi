@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_21_085540) do
+ActiveRecord::Schema.define(version: 2018_12_22_130935) do
 
   create_table "genres", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "genre_name"
@@ -77,6 +77,9 @@ ActiveRecord::Schema.define(version: 2018_12_21_085540) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "provider"
+    t.string "uid"
+    t.string "image_url"
   end
 
   add_foreign_key "school_genres", "genres"
