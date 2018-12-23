@@ -37,29 +37,30 @@ $(function() {
         if (form.checkValidity() === false) {
             event.preventDefault();
             event.stopPropagation();
-        } else {
-            // 検証結果がOKであれば任意入力フォームのsubmit可否を選定
-            submitFormControl();
-        }
+        } 
+        // else {
+        //     // 検証結果がOKであれば任意入力フォームのsubmit可否を選定
+        //     submitFormControl();
+        // }
         form.classList.add('was-validated');
 
     }, false);
     });
 
-    function submitFormControl() {
-        if ($("#school_school_movie_attributes_0_youtube_v").val() == '') {
-            $("#school_school_movie_attributes_0_youtube_v").prop('disabled', true);
-        }
-        if ($("#school_school_photo_attributes_0_photo").val() == '') {
-            $("#school_school_photo_attributes_0_photo").prop('disabled', true);
-        }
-        if ($("#school_school_photo_attributes_1_photo").val() == '') {
-            $("#school_school_photo_attributes_1_photo").prop('disabled', true);
-        }
-        if ($("#school_school_photo_attributes_2_photo").val() == '') {
-            $("#school_school_photo_attributes_2_photo").prop('disabled', true);
-        }
-    }
+    // function submitFormControl() {
+    //     if ($("#school_school_movie_attributes_0_youtube_v").val() == '') {
+    //         $("#school_school_movie_attributes_0_youtube_v").prop('disabled', true);
+    //     }
+    //     if ($("#school_school_photo_attributes_0_photo").val() == '') {
+    //         $("#school_school_photo_attributes_0_photo").prop('disabled', true);
+    //     }
+    //     if ($("#school_school_photo_attributes_1_photo").val() == '') {
+    //         $("#school_school_photo_attributes_1_photo").prop('disabled', true);
+    //     }
+    //     if ($("#school_school_photo_attributes_2_photo").val() == '') {
+    //         $("#school_school_photo_attributes_2_photo").prop('disabled', true);
+    //     }
+    // }
 
     $('.custom-file-input').on('change', handleFileSelect);
         function handleFileSelect(evt) {
