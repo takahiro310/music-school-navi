@@ -4,14 +4,18 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.new(user_params)
-    if user.save
-      log_in user
-      flash[:notice] = "ユーザー登録が完了しました"
-      redirect_to("/users/#{@user.id}")
-    else
-      render "users/new"
+    @user = User.new(user_params)
+
+    check_user = User.find_by(email: params[:user][:email])
+    unless check_user.nil? 
+      logger.debug("check_user NOT NIL")
+      flash.now[:danger] = '既に登録済みのメールアドレスです'
+      render "users/new" and return
     end
+
+    @user.save!
+    log_in @user
+    redirect_to new_school_path
   end
  
   def user_params

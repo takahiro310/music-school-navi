@@ -9,28 +9,29 @@ class SchoolsController < ApplicationController
   end
 
   def new
+    redirect_to "/login" unless logged_in?
     @school = School.new
     @school.school_photo.build
     @school.school_photo.build
     @school.school_photo.build
     @school.school_movie.build
-    # @genres = Genre.all
   end
 
   def create
+    return head(:forbidden) unless logged_in?
     @school = School.new(school_params)
     @school.save
   end
 
   def edit
     @school = School.find_by(id: params[:id])
-    @genres = Genre.all
+    redirect_to "/login" if current_user.id != @school.user_id
   end
 
   def update
     @school = School.find_by(id: params[:id])
+    return head(:forbidden) if current_user.id != @school.user_id
     @school.update(school_params)
-    @school.save
   end
 
   def school_params
@@ -40,11 +41,11 @@ class SchoolsController < ApplicationController
         {:genre_ids => []},
         school_photo_attributes:[:id,:school_id,:photo_id,:photo],
         school_movie_attributes:[:id,:school_id,:movie_id,:youtube_v],
-      )
-#      school_genre_attributes:[:id,:school_id,:genre_id]
+      ).merge(user_id: current_user.id)
     end
 
   def destroy
+    return head(:forbidden) unless logged_in?
     @school = School.find_by(id: params[:id])
     @school.destroy
   end
